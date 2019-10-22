@@ -1,0 +1,85 @@
+<html>
+<style>
+    body {
+        background-image: url('backgroung.png');
+        background-repeat: no-repeat;
+        background-attachment: fixed;
+        background-size: 100% 100%;
+    }
+
+    .centered {
+        position: absolute;
+        top: 50%;
+        left: 50%;
+    }
+</style>
+<head>
+    <link rel="stylesheet" type="text/css" href="w3.css">
+    <title>Driving taxi</title>
+</head>
+<script src="/webjars/sockjs-client/sockjs.min.js"></script>
+<script src="jquery.js"></script>
+<script src="/webjars/stomp-websocket/stomp.min.js"></script>
+<script>
+
+    function setConnected(connected) {
+        console.log("connected" + connected);
+    }
+
+    function showDialogue(){
+        $("#green_button").show();
+        $("#red_button").show();
+        $("#money").hide();
+    }
+
+    function accepted() {
+        $("#green_button").hide();
+        $("#red_button").hide();
+        $("#money").show();
+    }
+
+    function declined() {
+        $("#green_button").hide();
+        $("#red_button").hide();
+        $("#money").hide();
+    }
+
+    function connect() {
+        var socket = new SockJS('/gs-guide-websocket');
+        stompClient = Stomp.over(socket);
+        stompClient.connect({}, function (frame) {
+            setConnected(true);
+            console.log('Connected: ' + frame);
+
+
+            stompClient.subscribe('/topic/greetings', function (greeting) {
+               console.log("received" + greeting);
+
+
+                if('show' === greeting.body){
+                   showDialogue();
+               } else if ('yes' === greeting.body){
+                    accepted();
+
+                } else if ('no' === greeting.body){
+                    declined();
+                }
+            });
+        });
+    }
+
+    connect();
+</script>
+<body>
+<div class="centered">
+    <input type="button" class="w3-button w3-xxxlarge w3-green" id="green_button" value="Accept order" onclick="accepted();"/>
+    <input type="button" class="w3-button w3-xxxlarge w3-red"  id="red_button" value="Decline order" onclick="declined();" />
+    <input type="button" class="w3-button w3-xxxlarge w3-yellow"  id="money" value="money"  onclick="declined();"/>
+</div>
+</body>
+<script>
+    $("#green_button").hide();
+    $("#red_button").hide();
+    $("#money").hide();
+</script>
+</html>

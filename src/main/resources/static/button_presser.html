@@ -1,0 +1,31 @@
+<html>
+<script src="/webjars/sockjs-client/sockjs.min.js"></script>
+<script src="jquery.js"></script>
+<script src="/webjars/stomp-websocket/stomp.min.js"></script>
+<script>
+    function showButton() {
+        var xhttp = new XMLHttpRequest();
+        xhttp.open("GET", "/show", true);
+        xhttp.send();
+    }
+    function pretendYes() {
+        var xhttp = new XMLHttpRequest();
+        xhttp.open("GET", "/yes", true);
+        xhttp.send();
+    }
+    function pretendNo() {
+        var xhttp = new XMLHttpRequest();
+        xhttp.open("GET", "/no", true);
+        xhttp.send();
+    }
+
+</script>
+<head>
+    <link rel="stylesheet" type="text/css" href="w3.css">
+</head>
+<body>
+<input type="button" class="w3-button w3-xxxlarge w3-black" onclick="showButton()" value="show button dialogue on demo" />
+<input type="button" class="w3-button w3-xxxlarge w3-green" onclick="pretendYes()" value="Pretend yes pressed" />
+<input type="button" class="w3-button w3-xxxlarge w3-red" onclick="pretendNo()" value="Pretend no pressed" />
+</body>
+</html>
