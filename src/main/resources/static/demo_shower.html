@@ -2,15 +2,82 @@
 <style>
     body {
         background-image: url('backgroung.png');
-        background-repeat: no-repeat;
-        background-attachment: fixed;
-        background-size: 100% 100%;
+        background-size:     cover;
+        background-repeat:   no-repeat;
+        background-position: center center;
     }
 
     .centered {
         position: absolute;
-        top: 50%;
-        left: 50%;
+        width: 100%;
+        bottom: 20%;
+        padding: 0 10% 0 10%;
+        display: flex;
+        flex-direction: row;
+        justify-content: space-between;
+    }
+
+    .btn {
+        width: 30%;
+        height: 100px;
+        font-size: 2em;
+        font-weight: 700;
+        color: white;
+        text-shadow: 2px 2px black;
+        text-transform: capitalize;
+        letter-spacing: 5px;
+        border: 0;
+        border-radius: 25px;
+        box-shadow: 1px 1px 4px 2px black;
+        opacity: 0.9;
+        transition: transform 300ms, opacity 400ms ease-in;
+        -webkit-animation: btn-anim 600ms ease-in-out;
+        -moz-animation: btn-anim 600ms ease-in-out;
+        -o-animation: btn-anim 600ms ease-in-out;
+        animation: btn-anim 600ms ease-in-out;
+    }
+
+    .red {
+        background-color: red;
+    }
+
+    .green {
+        background-color: green;
+    }
+
+    .yellow {
+        background-color: yellow;
+    }
+
+    .btn:hover {
+        cursor: pointer;
+        transform: translate(2px, 2px);
+        opacity: 1;
+    }
+
+    .btn:focus {
+        outline: 0;
+    }
+
+    .btn:active {
+        transform: translate(4px, 4px);
+    }
+
+    @keyframes btn-anim {
+        0%   { opacity:0; transform: translateY(100%);}
+        100% { opacity:0.9; transform: translateY(0);}
+    }
+    @-o-keyframes btn-anim {
+        0%   { opacity:0; transform: translateY(100%);}
+        100% { opacity:0.9; transform: translateY(0);}
+    }
+    @-moz-keyframes btn-anim {
+        0%   { opacity:0; transform: translateY(100%);}
+        100% { opacity:0.9; transform: translateY(0);}
+    }
+    @-webkit-keyframes btn-anim {
+        0%   { opacity:0; transform: translateY(100%);}
+        100% { opacity:0.9; transform: translateY(0);}
     }
 </style>
 <head>
@@ -72,9 +139,9 @@
 </script>
 <body>
 <div class="centered">
-    <input type="button" class="w3-button w3-xxxlarge w3-green" id="green_button" value="Accept order" onclick="accepted();"/>
-    <input type="button" class="w3-button w3-xxxlarge w3-red"  id="red_button" value="Decline order" onclick="declined();" />
-    <input type="button" class="w3-button w3-xxxlarge w3-yellow"  id="money" value="money"  onclick="declined();"/>
+    <input type="button" class="btn green" id="green_button" value="Accept order" onclick="accepted();"/>
+    <input type="button" class="btn red"  id="red_button" value="Decline order" onclick="declined();" />
+    <input type="button" class="btn yellow"  id="money" value="money"  onclick="declined();"/>
 </div>
 </body>
 <script>
